@@ -12,12 +12,12 @@ backend.get('/',function(req, res){
     res.send('Hello')
 })
 
-backend.get('/api/registrazione',function(req, res){
-    res.send('Hello')
-})
-
-backend.get('/api',function(req, res){
-    res.send('Hello')
-})
-
 backend.listen(port)
+
+
+//TODO:
+//
+// 1. mettere delle modifiche patch ???
+// 2. mettere degli ingressi put ???
+//
+//
