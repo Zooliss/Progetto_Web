@@ -1,1 +1,28 @@
-<p>registrazione works!</p>
+<div class="row pt-5 ps-5">
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Registrazione</h3>
+            </div>
+            <div class="card-body">
+                <form class="form">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input [(ngModel)]="datiregistrazione.email" name="email" style="display:inline-block" type="text" class="form-control" placeholder="mario.rossi@gmail.com" required>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label>User</label>
+                        <input [(ngModel)]="datiregistrazione.user" name="user" style="display:inline-block" type="text" class="form-control" placeholder="mario.rossi"required>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label>Password</label>
+                        <input [(ngModel)]="datiregistrazione.psw" name="psw" style="display:inline-block" type="password" class="form-control" placeholder="************" required>
+                    </div>
+                    <div class="pt-3">
+                    <button type="button" (click)="registrautente()" class="btn btn-primary float-right">Register</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
