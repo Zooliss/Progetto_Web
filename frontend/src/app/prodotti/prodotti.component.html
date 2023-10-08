@@ -1,1 +1,14 @@
-<p>prodotti works!</p>
+<div class="row mt-5">
+    <div class="col-md-4 mb-3" *ngFor="let prodotto of prodotti">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">{{prodotto.nome}}</h5>
+                <p class="card-text">{{prodotto.marca}}</p>
+                <a class="btn btn-primary">Acquista</a>
+            </div>
+            <div class="card-footer text-muted">
+                {{prodotto.disponibilita}}
+            </div>
+        </div>
+    </div>
+</div>

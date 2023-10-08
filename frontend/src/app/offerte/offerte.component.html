@@ -1,1 +1,14 @@
-<p>offerte works!</p>
+<div class="row mt-5">
+    <div class="col-md-4 mb-3" *ngFor="let offerta of offerte">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">{{offerta.nome}}</h5>
+                <p class="card-text">{{offerta.marca}}</p>
+                <a class="btn btn-success">Acquista</a>
+            </div>
+            <div class="card-footer text-muted">
+                Sconto del {{offerta.sconto}}%
+            </div>
+        </div>
+    </div>
+</div>

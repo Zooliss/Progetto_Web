@@ -10,6 +10,7 @@ import { AccessoComponent } from './accesso/accesso.component';
 import { ProdottiComponent } from './prodotti/prodotti.component';
 import { OfferteComponent } from './offerte/offerte.component';
 import { AuthService } from './auth.service';
+import { ProdottiService } from './prodotti.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { AuthService } from './auth.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ProdottiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
