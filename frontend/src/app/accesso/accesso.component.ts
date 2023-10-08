@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accesso',
@@ -13,12 +14,15 @@ export class AccessoComponent {
     psw: ""
   }
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   accediconutente(){
     this.auth.utenteconcuiaccedere(this.datiaccesso)
       .subscribe(
-        res => console.log(res),
+        res => {
+          localStorage.setItem('token', res.token)
+          this.router.navigate(['/offerte'])
+        },
         err => console.log(err),
       )
   }

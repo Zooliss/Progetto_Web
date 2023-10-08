@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrazione',
@@ -14,12 +15,15 @@ export class RegistrazioneComponent{
     psw: ""
   }
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   registrautente(){
     this.auth.utentedaregistrare(this.datiregistrazione)
       .subscribe(
-        res => console.log(res),
+        res => {
+          localStorage.setItem('token', res.token)
+          this.router.navigate(['/offerte'])
+        },
         err => console.log(err),
       )
   }

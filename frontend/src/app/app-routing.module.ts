@@ -4,6 +4,7 @@ import { AccessoComponent } from './accesso/accesso.component'
 import { OfferteComponent } from './offerte/offerte.component';
 import { ProdottiComponent } from './prodotti/prodotti.component';
 import { RegistrazioneComponent } from './registrazione/registrazione.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
   },
   {
     path: 'offerte',
-    component: OfferteComponent
+    component: OfferteComponent,
+    canActivate: [authGuard]
   }
 ];
 
