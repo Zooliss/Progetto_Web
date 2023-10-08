@@ -27,19 +27,80 @@ router.post('/registrazione', async (req, res) => {
   router.post('/accesso', async (req, res) => {
     const datiutente = req.body;
     try{
-        const ricerca = await strutturautente.find({user: datiutente.user});
-        /*if (!user) {
-            res.status(401).send('Invalid User')
-          } else 
-          if ( utente.psw !== datiutente.psw) {
-            res.status(401).send('Invalid Password')
-          } else {
-            res.status(200).json({ricerca})
-          }*/
-          res.status(200).json({ricerca})
+        const ricerca = await strutturautente.find({user: datiutente.user, psw: datiutente.psw});
+        res.status(200).json({ricerca}) 
     }catch(e){
         res.status(500).json({error: e.message})
     }
+  })
+
+  router.get('/prodotti', (req,res) => {
+    let prodotti = [
+      {
+        "_id": "1",
+        "nome": "Mouse",
+        "marca": "Razer",
+        "disponibilita": "1"
+      },
+      {
+        "_id": "2",
+        "nome": "Tastiere",
+        "marca": "Trust",
+        "disponibilita": "0"
+      },
+      {
+        "_id": "3",
+        "nome": "Cuffie",
+        "marca": "JBL",
+        "disponibilita": "1"
+      },
+      {
+        "_id": "4",
+        "nome": "Monitor",
+        "marca": "Samsung",
+        "disponibilita": "1"
+      },
+      {
+        "_id": "5",
+        "nome": "Pc fisso",
+        "marca": "DELL",
+        "disponibilita": "0"
+      },
+      {
+        "_id": "6",
+        "nome": "Laptop",
+        "marca": "Asus",
+        "disponibilita": "1"
+      }
+    ]
+    res.json(prodotti)
+  })
+
+  router.get('/offerte', (req, res) => {
+    let offerte = [
+      {
+        "_id": "1",
+        "nome": "Tastiera e Mouse",
+        "marca": "logitech",
+        "disponibilita": "1",
+        "sconto": "20"
+      },
+      {
+        "_id": "2",
+        "nome": "Monitor",
+        "marca": "LG",
+        "disponibilita": "1",
+        "sconto": "50"
+      },
+      {
+        "_id": "3",
+        "nome": "Tappetino Mouse",
+        "marca": "Amazon Basic",
+        "disponibilita": "1",
+        "sconto": "5"
+      }
+    ]
+    res.json(offerte)
   })
 
 module.exports = router;
