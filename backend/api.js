@@ -28,7 +28,12 @@ router.post('/registrazione', async (req, res) => {
     const datiutente = req.body;
     try{
         const ricerca = await strutturautente.find({user: datiutente.user, psw: datiutente.psw});
-        res.status(200).json({ricerca}) 
+        if(ricerca.length == 0){
+            res.status(401).send('User o Password non corretti')
+        }else{
+            res.status(200).json({ricerca})
+        }
+        
     }catch(e){
         res.status(500).json({error: e.message})
     }
