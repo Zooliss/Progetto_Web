@@ -13,6 +13,8 @@ import { AuthService } from './auth.service';
 import { ProdottiService } from './prodotti.service';
 import { authGuard } from './auth.guard';
 import { ControllotokenService } from './controllotoken.service';
+import { ProfiloComponent } from './profilo/profilo.component';
+import { ProfiloService } from './profilo.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ControllotokenService } from './controllotoken.service';
     RegistrazioneComponent,
     AccessoComponent,
     ProdottiComponent,
-    OfferteComponent
+    OfferteComponent,
+    ProfiloComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { ControllotokenService } from './controllotoken.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService, authGuard, ProdottiService,
+  providers: [AuthService, authGuard, ProdottiService, ProfiloService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: ControllotokenService,

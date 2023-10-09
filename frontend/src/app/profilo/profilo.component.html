@@ -1,0 +1,25 @@
+<div class="row pt-5 ps-5">
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <table>
+                    <tr><td><h3 class="mb-0">Profilo</h3></td>
+                        <td class="ps-5"><button type="button" class="btn btn-success float-right ">Modifica</button></td></tr>
+                </table>                
+            </div>
+            <div class="card-body">
+                <form class="form">
+                    <div class="form-group pt-3">
+                        <label>Email:   {{datiutente[0].email}}</label>
+                        </div>
+                    <div class="form-group pt-3">
+                        <label>User:   {{datiutente[0].user}}</label>
+                        </div>
+                    <div class="pt-5">
+                    <button type="button" class="btn btn-primary float-right" (click)="tastoelimina()">Elimina Utente</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
