@@ -8,7 +8,7 @@ const dbPAR = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }
-var Identificativo = "d";
+var Identificativo = "";
 
 mongoose.connect(dbURL, dbPAR).then(() => {
   console.log('Connected to mongodb')
@@ -35,11 +35,16 @@ function verificatoken(req, res, next) {
 router.post('/registrazione', async (req, res) => {
   const nuovoutente = new strutturautente(req.body)
   try {
-    Identificativo = nuovoutente.user;
-    await nuovoutente.save()
-    let payload = { subject: nuovoutente._id }
-    let token = jwt.sign(payload, 'JWT_SECRET')
-    res.status(200).json({ token })
+    const ricerca = await strutturautente.find({ user: nuovoutente.user });
+    if (ricerca.length == 0) {
+      Identificativo = nuovoutente.user;
+      await nuovoutente.save()
+      let payload = { subject: nuovoutente._id }
+      let token = jwt.sign(payload, 'JWT_SECRET')
+      res.status(200).json({ token })
+    } else {
+      res.status(401).send('Nome Utente usato')
+    }
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
@@ -70,21 +75,39 @@ router.get('/profilo', verificatoken, async (req, res) => {
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
-
 })
 
-router.delete('/profilo/elimina', verificatoken, (req, res) => {
+router.delete('/profilo/elimina', verificatoken, async (req, res) => {
   try {
-    /*strutturautente.deleteMany({ user: Identificativo }, function (err) {
-      if(err) console.log(err);
-      console.log("Successful deletion");
-    });*/
-    strutturautente.remove({ user: Identificativo });
-    res.status(200).json("cancellato")
+    const ricerca = await strutturautente.deleteOne({ user: Identificativo });
+    res.json(ricerca)
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
+})
 
+router.put('/profilo/modifica', verificatoken, async (req, res) => {
+  try {
+    if (req.body.email != "" && req.body.psw != "") {
+      const ricerca = await strutturautente.updateOne({ user: Identificativo }, { $set: req.body });
+      res.status(200).json(ricerca)
+    } else {
+      if (req.body.email != "" && req.body.psw == "") {
+        const ricerca2 = await strutturautente.updateOne({ user: Identificativo }, { email: req.body.email });
+        res.status(200).json(ricerca2)
+      }else{
+        if (req.body.email == "" && req.body.psw != "") {
+          const ricerca3 = await strutturautente.updateOne({ user: Identificativo }, { psw: req.body.psw });
+          res.status(200).json(ricerca3)
+        }else{
+          res.status(200).send('Entrambi i parametri sono vuoti, nessuna modifica da apportare')
+        }
+      }
+    }
+
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
 })
 
 router.get('/prodotti', (req, res) => {
